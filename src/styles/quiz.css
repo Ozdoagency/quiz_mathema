@@ -1,0 +1,53 @@
+.option-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.option-button:hover {
+  transform: translateY(-2px);
+}
+
+.option-button:active {
+  transform: translateY(0);
+}
+
+.option-selected {
+  transform: scale(1.02);
+  background-color: hsl(var(--primary) / 0.1);
+  border-color: hsl(var(--primary) / 0.5);
+  box-shadow: 0 4px 12px hsl(var(--primary) / 0.15);
+}
+
+/* Progress bar animation */
+.progress-bar {
+  position: relative;
+  transition: width 0.6s ease-in-out;
+}
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.1) 25%,
+    rgba(255, 255, 255, 0.2) 25%,
+    rgba(255, 255, 255, 0.2) 50%
+  );
+  background-size: 20px 20px;
+  animation: barber-pole 0.8s linear infinite;
+}
+
+@keyframes barber-pole {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 20px 20px;
+  }
+}
+
+/* Удалите или закомментируйте старый код .barber-pole и barber-pole-animation */

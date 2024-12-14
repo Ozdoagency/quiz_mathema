@@ -1,0 +1,322 @@
+@tailwind base;
+/* Общие анимации */
+@keyframes shine {
+  0% { background-position: -200% 0; }
+  100% { background-position: 100% 0; }
+}
+
+@keyframes barber-pole {
+  100% { background-position: 20px 0; }
+}
+
+/* Общие стили прогресс-бара */
+.progress-base {
+  position: relative;
+  will-change: background-position;
+  background-size: 20px 20px;
+}
+/* Запрашиваю показать содержимое файла index.css, чтобы подтвердить разницу */
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 230 25% 5%;
+    --foreground: 210 40% 98%;
+    --card: 230 25% 7%;
+    --card-foreground: 210 40% 98%;
+    --popover: 230 25% 7%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 75.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+    --radius: 0.75rem;
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 230 25% 5%;
+    --card: 0 0% 100%;
+    --card-foreground: 230 25% 5%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 230 25% 5%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 230 25% 5%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 230 25% 5%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@keyframes animate-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: animate-in 0.3s ease-out;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Bolt.new inspired background */
+.bolt-background {
+  background: radial-gradient(
+      circle at 50% 0,
+      hsl(var(--primary) / 0.15),
+      transparent 75%
+    ),
+    radial-gradient(
+      circle at 0% 50%,
+      hsl(280 100% 50% / 0.1),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 100% 50%,
+      hsl(200 100% 50% / 0.1),
+      transparent 50%
+    );
+  background-color: hsl(var(--background));
+}
+
+.bolt-card {
+  @apply relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.075) 0%,
+    rgba(255, 255, 255, 0.025) 100%
+  );
+}
+
+.bolt-glow {
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  top: -25%;
+  left: -25%;
+  background: radial-gradient(
+    circle at center,
+    hsl(var(--primary) / 0.15),
+    transparent 50%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bolt-card:hover .bolt-glow {
+  opacity: 1;
+}
+
+.light .bolt-card {
+  border-color: rgba(121, 170, 255, 0.2); /* Более заметная обводка в light mode */
+}
+
+/* Grid background */
+.grid-background {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    );
+  background-size: 32px 32px;
+}
+
+.light .grid-background {
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px
+    );
+  background-size: 32px 32px;
+}
+
+/* Button styles */
+.bolt-button {
+  @apply relative overflow-hidden rounded-full bg-primary px-6 py-3 text-primary-foreground transition-all duration-300;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary)),
+    hsl(var(--primary) / 0.8)
+  );
+}
+
+.bolt-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: shine 2s linear infinite;
+  animation-delay: 2s;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.bolt-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -8px hsl(var(--primary) / 0.5);
+}
+
+/* Progress bar animation */
+.progress-bar {
+  position: relative;
+  transition: width 0.6s ease-in-out;
+  animation: barberpole 3s linear infinite; /* Добавлено */
+}
+
+
+.progress-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1) 10px,
+    rgba(255, 255, 255, 0.2) 10px,
+    rgba(255, 255, 255, 0.2) 20px
+  );
+  animation: barber-pole 0.8s linear infinite;
+
+  .barber-pole {
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 25%, transparent 55%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent);
+    background-size: 50px 50px;
+  }
+  
+  @keyframes barber-pole-animation {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 100%;
+    }
+  }
+
+}
+
+/* Scrollbar styles */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thumb-gray-300::-webkit-scrollbar-thumb {
+  background-color: rgb(209 213 219);
+  border-radius: 6px;
+}
+
+.scrollbar-track-gray-100::-webkit-scrollbar-track {
+  background-color: rgb(243 244 246);
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Drag and Drop styles */
+[draggable] {
+  user-select: none;
+  -webkit-user-drag: element;
+}
+
+.dragging {
+  opacity: 0.5;
+  cursor: grabbing !important;
+}
+/* Styles for the bonus block */
+.bonus-block {
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 16px; /* Internal padding */
+  transition: border-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.bonus-block:hover {
+  border-color: rgba(0, 0, 0, 0.2); /* Slightly darker border on hover */
+}
+
+.light .bg-light-blue {
+  background-color: rgb(228, 238, 255); /* Бледно-голубой фон в light mode */
+}
+
+.fixed-width {
+  width: 48px; /* Установите желаемую ширину */
+  height: 48px; /* Установите желаемую высоту */
+}
+@media (min-width: 768px) {
+  .modal-content {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal-content {
+    padding-top: 0rem;
+    padding-bottom: 3rem;
+  }
+}
